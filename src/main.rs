@@ -1,6 +1,7 @@
 struct Structure{
     v : Vec<i32>, 
     //test
+    //test 2
 }
 
 impl Structure{
