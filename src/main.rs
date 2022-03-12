@@ -37,6 +37,32 @@ impl Structure{
             self.v.remove(index);
         }        
     }
+    fn slice(&self, min:i32, max:i32)->&[i32]{
+        let mut start=0;
+        let mut end=0;
+        for element in &self.v{
+            if *element < min{
+                start+=1;
+            }
+            else {
+                break;
+            }
+        }
+        for element in &self.v{
+            if *element < max{
+                end+=1;
+            }
+            else {
+                break;
+            }
+        }
+        if start>end {
+            let aux=start;
+            start=end;
+            end=aux;
+        }
+      return &self.v[start as usize..end as usize];
+    }
     fn prime_numbers(&self)-> Vec<i32>{
         let mut v_prime=self.v.clone();
         let mut index=0;
@@ -91,7 +117,7 @@ impl Structure{
         return v_prime;
     }
     fn display(&self){
-        // for element in &self.v{
+        // for element in self.v.iter().rev(){
         //     println!("{}",element);
         // }
         println!("{:?}",self.v);
@@ -106,10 +132,13 @@ fn main() {
     vector.add(3);
     vector.add(4);
     vector.add(21);
+    vector.remove(21);
     vector.add(9);
     vector.add(11);
     vector.display();
     vector.display();
-    println!("{}",-2%2);
+    let v=[1,2,3,4,5,6];
+    println!("{:?}",&v[0..1]);
     println!("{:?}",vector.prime_numbers());
+    println!("{:?}",vector.slice(1,2));
 }
